@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>hw lesson1</title>
+
+  </head>
+  <body>
+    <p>Задание 1</p>
+
+    <script type="text/javascript">
+    'use strict';
+
+    function loop(times = "0", callback = "null") {
+      if(callback != "null"){
+        if (typeof callback !== 'function') {
+           console.log('break loop');
+           return false;
+        } else {
+          for (let i = 0; i < times; i++) callback();
+          }
+      }
+    }
+    loop(5, () => document.write('Ok<br>'));
+    </script>
+    <p>Задание 2</p>
+    <script type="text/javascript">
+    let w, h, r;
+    function calculateArea(width = "0", height = "0", radius = "0") {
+      if (radius == 0) {
+        let area = parseInt(width) * parseInt(height);
+        let input = 'width = ' + width + ', height = ' + height;
+        let figure = 'rectangle';
+        return {
+          'figure': figure,
+          'input': input,
+          'area': area,
+        }
+      } else {
+        let area = Math.pow(radius, 2) * Math.PI;
+        let input = 'radius = ' + radius;
+        let figure = 'circle';
+        return {
+          'figure': figure,
+          'input': input,
+          'area': area,
+        }
+      }
+    }
+    function refresh() {
+      document.querySelector('.fig').value = '';
+    }
+    function figure() {
+      w = 0;
+      h = 0;
+      r = 0;
+      let fig = document.querySelector('.fig').value;
+      console.log(fig);
+      switch (fig) {
+        case 'rectangle':
+          w = prompt('введите ширину');
+          h = prompt('введите длинну');
+          console.log(calculateArea(w, h, r));
+          break;
+        case 'circle':
+          r = prompt('введите радиус');
+          console.log(calculateArea(w, h, r));
+          break;
+        default:
+
+      }
+    }
+    </script>
+<input list="figure" type="text" name="" value="" class="fig" oninput='figure()' onclick='refresh()'>
+<datalist class="figure" id="figure">
+  <option value="rectangle">прямоугольник</option>
+  <option value="circle">круг</option>
+</datalist>
+  <p>Задание 3</p>
+  </body>
+</html>
