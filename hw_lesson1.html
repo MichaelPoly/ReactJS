@@ -77,5 +77,144 @@
   <option value="circle">круг</option>
 </datalist>
   <p>Задание 3</p>
+<p>
+  Human -> Employee -> Developer
+  Human -> Employee -> Manager
+  Каждый Менеджер (Manager) должен иметь внутренний массив своих сотрудников
+  (разработчиков), а также методы по удалению/добавлению разработчиков.
+  Каждый Разработчик (Developer) должны иметь ссылку на Менеджера и методы для
+  изменения менеджера (имеется ввиду возможность назначить другого менеджера).
+  У класса Human должны быть следующие параметры: name (строка), age (число),
+  dateOfBirth (строка или дата)
+  У класса Employee должны присутствовать параметры: salary (число), department
+  (строка)
+  В классе Human должен присутствовать метод displayInfo, который возвращает строку
+  со всеми параметрами экземпляра Human.
+  В классе Employee должен быть реализовать такой же метод (displayInfo), который
+  вызывает базовый метод и дополняет его параметрами из экземпляра Employee
+  Чтобы вызвать метод базового класса, необходимо внутри вызова метода displayInfo
+  класса Employee написать: super.displayInfo(), это вызовет метод disaplyInfo класс
+  Human и вернет строку с параметрами Human'a.
+</p>
+<script type="text/javascript">
+  class Human {
+    constructor(name, age, dateOfBirth) {
+      this.name = name;
+      this.age = age;
+      this.dateOfBirth = dateOfBirth;
+    }
+    displayInfo() {
+      return 'Имя: ' + this.name + ', Возраст: ' + this.age + ', Дата рождения: ' + this.dateOfBirth;
+    }
+    getAge() {
+      return this.age;
+    }
+    getName() {
+      return this.name;
+    }
+    getDateOfBirth() {
+      return this.dateOfBirth;
+    }
+  }
+  class Employee extends Human {
+    constructor(name, age, dateOfBirth, salary, department) {
+      super(name, age, dateOfBirth);
+      this.salary = salary;
+      this.department = department;
+    }
+    displayInfo() {
+      return super.displayInfo() + ', Зарплата: ' + this.salary + ', Отдел: ' + this.department;
+    }
+    getSalary() {
+      return this.salary;
+    }
+    getDepartment() {
+      return this.department;
+    }
+  }
+
+  class Developer extends Employee {
+    constructor(name, age, dateOfBirthday, salary, department, menager = "null") {
+      super(name, age, dateOfBirthday, salary, department);
+      this.menager = menager;
+    }
+    displayInfo() {
+      return super.displayInfo() + ', Менеджер: ' + this.menager;
+    }
+    getMenager() {
+      return this.menager;
+    }
+    getMenagerId() {
+      return this.menager['menagerId'];
+    }
+    changeManager(menager) {
+      this.menager = menager;
+    }
+
+  }
+  class Menager extends Employee {
+    constructor(name, age, dateOfBirthday, salary, department, menagerId, developers = []) {
+      super(name, age, dateOfBirthday, salary, department);
+      this.menagerId = menagerId;
+      this.developers = developers;
+    }
+    displayInfo() {
+      return super.displayInfo() + ', Id Менеджера: ' + this.menagerId + ', разработчики: ' + this.developers;
+    }
+    getDevelopers() {
+      return this.developers;
+    }
+    getMenagerId() {
+      return this.menagerId;
+    }
+    addDeveloper(developer, menagerId) {
+      this.developers.push(developer);
+      developer.changeManager(menagerId);
+    }
+    removeDeveloper(developer) {
+      for (let i = 0; i < this.developers.length; i++) {
+        console.log(this.developers[i]['name']);
+        console.log(developer.getName());
+        if (this.developers[i]['name'] == developer.getName()) {
+          this.developers.splice(i, 1);
+          break;
+        }
+      }
+      developer.changeManager('null');
+    }
+  }
+
+
+  let human1 = new Human('Вася', 38, '12-03-1979');
+  document.write(human1.displayInfo() + '<br>');
+  let Employee1 = new Employee('Вася', 38, '12-03-1979', 100000, 'It');
+  document.write(Employee1.displayInfo() + '<br>');
+  let Employee2 = new Employee(human1.getName(), human1.getAge(), human1.getDateOfBirth(), 100000, 'It');
+  document.write(Employee2.displayInfo() + '<br>');
+  document.write(Employee2.getName() + '<br>');
+
+  let developer1 = new Developer(human1.getName(), human1.getAge(), human1.getDateOfBirth(), 100000, 'It');
+  let developer2 = new Developer('Анастасия', 30, '17-05-1987', 100000, 'It');
+  console.log(developer1);
+  let menager1 = new Menager('Василий Иванович', 40, '14-09-1977', 150000, 'It', 'Менеджер1');
+  let menager2 = new Menager('Иван Васильевич', 41, '02-10-1976', 150000, 'It', 'Менеджер2');
+  console.log(menager1);
+  menager1.addDeveloper(developer1, menager1);
+  menager1.addDeveloper(developer2, menager1);
+  document.write('Менеджер разработчика ' + developer2['name'] + ' - ' + developer2.getMenagerId() + '<br>');
+  console.log(developer2.getMenager());
+  console.log(developer1);
+  console.log(menager1);
+  console.log(menager2);
+  developer2.changeManager(menager2);
+  menager1.removeDeveloper(developer2);
+  menager2.addDeveloper(developer2, menager2);
+  document.write('Новый менеджер разработчика ' + developer2['name'] + ' - ' + developer2.getMenagerId() + '<br>');
+  console.log(developer2);
+  console.log(menager1);
+  console.log(menager2);
+  console.log(menager1['developers']);
+</script>
+
   </body>
 </html>
