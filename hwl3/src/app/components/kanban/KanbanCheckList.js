@@ -1,0 +1,19 @@
+import React from 'react';
+
+export default class KanbanCheckList extends React.Component
+{
+    render(){
+        let tasks = this.props.tasks.map((task, index) => {
+            return (<li className="checklist__task" key={index}>
+                <input type="checkbox" defaultChecked={task.done} /> &nbsp;
+                {task.name}
+            </li>);
+        });
+
+        return (
+            <div className="checklist">
+                <ul>{tasks}</ul>
+            </div>
+        );
+    }
+}
