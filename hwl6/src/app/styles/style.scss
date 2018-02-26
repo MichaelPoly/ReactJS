@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 100%;
+  font-weight: normal;
+}
+@mixin reference($decoration,$size,$weight,$color) {
+  text-decoration: $decoration;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin justify-content($pos1) {
+  -webkit-justify-content: $pos1;
+  -ms-flex-pack: $pos1;
+  justify-content: $pos1;
+}
+@mixin align-items($pos3) {
+  -webkit-align-items: $pos3;
+  -ms-flex-align: $pos3;
+  align-items: $pos3;
+}
+@mixin block($width,$height,$borderWidth,$borderStyle,$borderColor,$borderRadius) {
+  width: $width;
+  height: $height;
+  border-width: $borderWidth;
+  border-style: $borderStyle;
+  border-color: $borderColor;
+  border-radius: $borderRadius;
+}
+header {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  @include justify-content(center);
+  @include align-items(center);
+  @include block(100%, 15vh, 0px, solid, green, 0);
+  background-color: orange;
+    h1 {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      @include justify-content(center);
+      @include align-items(center);
+      @include block(100%, 100%, 0px, solid, green, 0);
+      font-size: 2em;
+      font-weight: bold;
+      color: green;
+    }
+}
+.topBar{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  @include justify-content(center);
+  @include align-items(center);
+  @include block(100%, 5vh, 0px, solid, green, 0);
+  background-color: lightgray;
+  ul {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include block(90%, 98%, 0px, solid, green, 0);
+    background-color: lightgray;
+    margin: 1px;
+    li {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      @include justify-content(center);
+      @include align-items(center);
+      @include block(20%, 100%, 0px, solid, green, 3px);
+      background-color: lightgray;
+      list-style-type: none;
+      text-align: center;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        text-decoration: none;
+        color: green;
+        font-weight: bold;
+      }
+    }
+    .active {
+      list-style-type: none;
+      text-align: center;
+      background-color: gray;
+      a {
+        text-decoration: none;
+        color: lightgray;
+      }
+    }
+  }
+  .enterBtn {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    @include justify-content(center);
+    @include align-items(center);
+    @include block(20%, 100%, 1px, solid, green, 3px);
+    background-color: lightgray;
+    a {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      @include justify-content(center);
+      @include align-items(center);
+      color: black;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .enterBtn:hover {
+    background-color: grey;
+    a {
+      color: green;
+      font-weight: bold;
+    }
+  }
+}
+.loginBlock {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  @include justify-content(center);
+  @include align-items(center);
+  @include block(90vw, 60vh, 0px, solid, green, 0);
+  margin: 0;
+  padding: 0;
+  .login {
+    position: fixed;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    @include justify-content(center);
+    @include align-items(center);
+    @include block(30vw, 20vh, 1px, solid, green, 3px);
+    background-color: lightgray;
+    .loginForm {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      @include block(100%, 100%, 0px, solid, green, 0);
+      label {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        @include flex-direction(row);
+        @include justify-content(space-between);
+        @include align-items(center);
+        @include block(90%, auto, 0, solid, black, 0);
+      }
+      .LogBtn {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        @include justify-content(center);
+        @include align-items(center);
+        @include block(60%, auto, 0, solid, black, 5px);
+        background-color: grey;
+        color: lightgray;
+        margin-top: 5%;
+      }
+    }
+  }
+}
+footer {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  @include justify-content(center);
+  @include align-items(center);
+  @include block(100%, 5vh, 0px, solid, green, 0);
+  background-color: orange;
+  .container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    @include justify-content(center);
+    @include align-items(center);
+    @include block(100%, 100%, 0px, solid, green, 0);
+    p {
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      @include justify-content(center);
+      @include align-items(center);
+      color: green;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
